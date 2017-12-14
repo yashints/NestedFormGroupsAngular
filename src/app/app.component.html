@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Select your services</h1>
+  <form [formGroup]="packageForm" (submit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Your name:</label>
+        <input name="name" formControlName="name" />
+      </div>
+      <div formGroupName="serviceInfo">
+        <div class="form-group">
+          <label>Delivery Date:</label>
+          <input formControlName="deliveryDate" type="date"/>
+        </div>
+          <div class="form-group">
+              <label>Services:</label>
+              <div *ngFor="let service of services.controls; let i = index">
+                  <label>
+                      <input type="checkbox"
+                             [formControl]="service"
+                             value="{{serviceList[i].code}}"/>
+                      {{serviceList[i].name}}
+                  </label>
+              </div>
+          </div>
+      </div>
+      <div>
+        <button class="btn btn-primary">Save</button>
+      </div>
+  </form>
+  <br/>
+  <div class="well">
+    {{packageForm.value | json}}
+  </div>
+</div>
+
